@@ -1,0 +1,7 @@
+{
+	"name" : "migration/migration",
+	"require": {
+		"components/jquery": "^3.3",
+		"twbs/bootstrap": "^4.1"
+	}
+}

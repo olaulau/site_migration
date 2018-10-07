@@ -1,0 +1,8 @@
+requirements :
+- sshpass
+- lbzip2
+
+todo :
+- cleanup destination ? cleanup source (after test & ask) ?
+- optimisation when running directly on source or destination : do not specify shell host, do file modification where the script is running
+- option to exclude a folder (maybe a subsite, migrated in a second time with it's own database)

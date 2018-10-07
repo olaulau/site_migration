@@ -1,0 +1,7 @@
+un formulaire pour juste aller chercher dans la base ISPConfig :
+- webdomain
+- shell user
+	- saisir password
+- base de données
+	- saisir password
+- URL réelle (scheme, host, directory)
