@@ -1,7 +1,7 @@
 /.buildpath
 /.project
 /.settings/
-/.ptp-sync-folder
+.ptp-sync-folder
 /.ptp-sync/
 /vendor/
 /config.inc.php
