@@ -23,17 +23,14 @@ require_once __DIR__ . "/../config.inc.php";
 			</select> <br/>
 			
 			<label for="website">website</label>
-			<select id="website" name=website>
+			<select id="website" name="website">
 				<option value=""></option>
 			</select> <br/>
 			
-			<label for="" >base</label>
-			<select id="" name="">
+			<label for="dbname">dbname</label>
+			<select id="dbname" name="dbname">
 			</select> <br/>
 			
-			<label for="" >user</label>
-			<select id="" name="">
-			</select> <br/>
 		</form>
 <script type="text/javascript" src="js/source_data.js"></script>
 <?php

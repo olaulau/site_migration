@@ -56,6 +56,21 @@ function loadWebsites () {
 }
 
 
+function loadDbnames () {
+	var url = 'php/vhffs.ajax.php?action=dbnames';
+	var project = $("select#project").val();
+	if (! $.isEmptyObject(project)) {
+		url = url + "&projectname=" + project;
+	}
+	$.ajax(url,
+		{success: function(result){
+				fill_select("dbname", result, true, true, true);
+			}
+		}
+	);
+}
+
+
 $(function() {
 	
 	// users
@@ -69,18 +84,26 @@ $(function() {
 		}
 	);
 	
-	
 	// projects
 	$("select#project").change(function(value){
 		loadWebsites ();
+		loadDbnames();
 	});
 	loadGroups();
 	
-	
 	// website
 	$("select#website").change(function(value){
-//		alert("website change");
+		val = $(this).val();
+		$("#src_url_host").val(val);
 	});
 	loadWebsites();
+	
+	// dbnames
+	$("select#dbname").change(function(value){
+		val = $(this).val();
+		$("#src_db_name").val(val);
+		$("#src_db_user").val(val);
+	});
+	loadDbnames();
 	
 });

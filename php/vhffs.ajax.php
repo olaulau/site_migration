@@ -50,6 +50,20 @@ else if ($_GET['action'] === 'websites') {
 	}
 }
 
+else if ($_GET['action'] === 'dbnames') {
+	$sql = "
+		SELECT	DISTINCT m.dbname
+		FROM	vhffs_mysql m, vhffs_object o, vhffs_groups g
+		WHERE	m.object_id = o.object_id
+		AND		o.owner_gid = g.gid
+		" . (empty($_GET['projectname']) ? "" : "AND		g.groupname = ?") . "
+		ORDER BY m.dbname ASC
+	";
+	if (!empty($_GET['projectname'])) {
+		$params[] = $_GET['projectname'];
+	}
+}
+
 $stmt_vhffs = $dbh_vhffs->prepare($sql);
 if ($stmt_vhffs === false) {
 	echo $dbh_vhffs->errorCode() . " : ". $dbh_vhffs->errorInfo()[2];
