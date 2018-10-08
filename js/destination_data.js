@@ -26,15 +26,10 @@ function fill_select (select_id, values, clearFirst, addEmptyValue, selectAloneV
 }
 
 
-function loadIspconfigGroups () {
-	var url = 'php/vhffs.ajax.php?action=projects';
-	var user = $("select#dest_user").val();
-	if (! $.isEmptyObject(user)) {
-		url = url + "&username=" + user;
-	}
-	$.ajax(url,
+function loadIspconfigUsers () {
+	$.ajax('php/ispconfig.ajax.php?action=users',
 		{success: function(result){
-				fill_select("dest_project", result, true, true, true);
+				fill_select("dest_user", result, true, true, true);
 			}
 		}
 	);
@@ -42,10 +37,10 @@ function loadIspconfigGroups () {
 
 
 function loadIspconfigWebsites () {
-	var url = 'php/vhffs.ajax.php?action=websites';
-	var project = $("select#dest_project").val();
-	if (! $.isEmptyObject(project)) {
-		url = url + "&projectname=" + project;
+	var url = 'php/ispconfig.ajax.php?action=websites';
+	var user = $("select#dest_user").val();
+	if (! $.isEmptyObject(user)) {
+		url = url + "&user=" + user;
 	}
 	$.ajax(url,
 		{success: function(result){
@@ -56,11 +51,26 @@ function loadIspconfigWebsites () {
 }
 
 
+function loadIspconfigDbusers () {
+	var url = 'php/ispconfig.ajax.php?action=dbusers';
+	var website = $("select#dest_website").val();
+	if (! $.isEmptyObject(website)) {
+		url = url + "&website=" + website;
+	}
+	$.ajax(url,
+		{success: function(result){
+				fill_select("dest_dbuser", result, true, true, true);
+			}
+		}
+	);
+}
+
+
 function loadIspconfigDbnames () {
-	var url = 'php/vhffs.ajax.php?action=dbnames';
-	var project = $("select#dest_project").val();
-	if (! $.isEmptyObject(project)) {
-		url = url + "&projectname=" + project;
+	var url = 'php/ispconfig.ajax.php?action=dbnames';
+	var dbuser = $("select#dest_dbuser").val();
+	if (! $.isEmptyObject(dbuser)) {
+		url = url + "&dbuser=" + dbuser;
 	}
 	$.ajax(url,
 		{success: function(result){
@@ -75,35 +85,28 @@ $(function() {
 	
 	// users
 	$("select#dest_user").change(function(value){
-		loadIspconfigGroups ();
-	});
-	$.ajax('php/vhffs.ajax.php?action=users',
-		{success: function(result){
-				fill_select("dest_user", result, true, true, true);
-			}
-		}
-	);
-	
-	// projects
-	$("select#dest_project").change(function(value){
 		loadIspconfigWebsites ();
-		loadIspconfigDbnames();
 	});
-	loadIspconfigGroups();
+	loadIspconfigUsers ();
 	
 	// website
 	$("select#dest_website").change(function(value){
-		val = $(this).val();
-		$("#dest_url_host").val(val);
+		$("#dest_url_host").val($(this).val());
+		loadIspconfigDbusers ();
 	});
-	loadIspconfigWebsites();
+	loadIspconfigWebsites ();
+	
+	// dbusers
+	$("select#dest_dbuser").change(function(value){
+		$("#dest_db_user").val($(this).val());
+		loadIspconfigDbnames ();
+	});
+	loadIspconfigDbusers ();
 	
 	// dbnames
 	$("select#dest_dbname").change(function(value){
-		val = $(this).val();
-		$("#dest_db_name").val(val);
-		$("#dest_db_user").val(val);
+		$("#dest_db_name").val($(this).val());
 	});
-	loadIspconfigDbnames();
+	loadIspconfigDbnames ();
 	
 });

@@ -26,11 +26,21 @@ function fill_select (select_id, values, clearFirst, addEmptyValue, selectAloneV
 }
 
 
+function loadVhffsUsers () {
+	$.ajax('php/vhffs.ajax.php?action=users',
+		{success: function(result){
+				fill_select("src_user", result, true, true, true);
+			}
+		}
+	);
+}
+
+
 function loadVhffsGroups () {
 	var url = 'php/vhffs.ajax.php?action=projects';
 	var user = $("select#src_user").val();
 	if (! $.isEmptyObject(user)) {
-		url = url + "&username=" + user;
+		url = url + "&user=" + user;
 	}
 	$.ajax(url,
 		{success: function(result){
@@ -45,7 +55,7 @@ function loadVhffsWebsites () {
 	var url = 'php/vhffs.ajax.php?action=websites';
 	var project = $("select#src_project").val();
 	if (! $.isEmptyObject(project)) {
-		url = url + "&projectname=" + project;
+		url = url + "&project=" + project;
 	}
 	$.ajax(url,
 		{success: function(result){
@@ -60,7 +70,7 @@ function loadVhffsDbnames () {
 	var url = 'php/vhffs.ajax.php?action=dbnames';
 	var project = $("select#src_project").val();
 	if (! $.isEmptyObject(project)) {
-		url = url + "&projectname=" + project;
+		url = url + "&project=" + project;
 	}
 	$.ajax(url,
 		{success: function(result){
@@ -77,12 +87,7 @@ $(function() {
 	$("select#src_user").change(function(value){
 		loadVhffsGroups ();
 	});
-	$.ajax('php/vhffs.ajax.php?action=users',
-		{success: function(result){
-				fill_select("src_user", result, true, true, true);
-			}
-		}
-	);
+	loadVhffsUsers ();
 	
 	// projects
 	$("select#src_project").change(function(value){

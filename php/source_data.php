@@ -15,8 +15,7 @@ require_once __DIR__ . "/../config.inc.php";
 			<label for="src_user">user</label>
 			<select id="src_user" name="src_user">
 				<option value=""></option>
-			</select> <br/>
-			
+			</select>
 			<label for="src_project">project</label>
 			<select id="src_project" name="src_project">
 				<option value=""></option>
