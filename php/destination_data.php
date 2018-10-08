@@ -32,28 +32,30 @@ $dbh_ispconfig = null;
 // display ispconfig
 ?>
 		<h2> DESTINATION </h2>
-		<table id="dest" class="decorated">
-			<thead>
-				<tr>
-					<th>group_name</th>
-					<th>domain_name</th>
-					<th>database_name</th>
-					<th>database_user</th>
-				</tr>
-			</thead>
-			<tbody>
-<?php
-foreach($stmt_ispconfig as $row) {
-	?>
-				<tr>
-					<td id=""><?= $row['group_name'] ?></td>
-					<td id="domain"><?= $row['domain_name'] ?></td>
-					<td id="db_name"><?= $row['database_name'] ?></td>
-					<td id="db_user"><?= $row['database_user'] ?></td>
-				</tr>
-	<?php
-}
-?>
-			</tbody>
-		</table>
-<?php
+		<form>
+			<label for="dest_server">SERVER</label>
+			<select id="dest_server" name="dest_server">
+				<option value=""></option>
+			</select> <br/>
+			<br/>
+			
+			<label for="dest_user">user</label>
+			<select id="dest_user" name="dest_user">
+				<option value=""></option>
+			</select> <br/>
+			
+			<label for="dest_project">project</label>
+			<select id="dest_project" name="dest_project">
+				<option value=""></option>
+			</select> <br/>
+			
+			<label for="dest_website">website</label>
+			<select id="dest_website" name="dest_website">
+				<option value=""></option>
+			</select> <br/>
+			
+			<label for="dest_dbname">dbname</label>
+			<select id="dest_dbname" name="dest_dbname">
+			</select> <br/>
+		</form>
+<script type="text/javascript" src="js/destination_data.js"></script>

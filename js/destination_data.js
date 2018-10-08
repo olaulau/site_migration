@@ -26,45 +26,45 @@ function fill_select (select_id, values, clearFirst, addEmptyValue, selectAloneV
 }
 
 
-function loadVhffsGroups () {
+function loadIspconfigGroups () {
 	var url = 'php/vhffs.ajax.php?action=projects';
-	var user = $("select#src_user").val();
+	var user = $("select#dest_user").val();
 	if (! $.isEmptyObject(user)) {
 		url = url + "&username=" + user;
 	}
 	$.ajax(url,
 		{success: function(result){
-				fill_select("src_project", result, true, true, true);
+				fill_select("dest_project", result, true, true, true);
 			}
 		}
 	);
 }
 
 
-function loadVhffsWebsites () {
+function loadIspconfigWebsites () {
 	var url = 'php/vhffs.ajax.php?action=websites';
-	var project = $("select#src_project").val();
+	var project = $("select#dest_project").val();
 	if (! $.isEmptyObject(project)) {
 		url = url + "&projectname=" + project;
 	}
 	$.ajax(url,
 		{success: function(result){
-				fill_select("src_website", result, true, true, true);
+				fill_select("dest_website", result, true, true, true);
 			}
 		}
 	);
 }
 
 
-function loadVhffsDbnames () {
+function loadIspconfigDbnames () {
 	var url = 'php/vhffs.ajax.php?action=dbnames';
-	var project = $("select#src_project").val();
+	var project = $("select#dest_project").val();
 	if (! $.isEmptyObject(project)) {
 		url = url + "&projectname=" + project;
 	}
 	$.ajax(url,
 		{success: function(result){
-				fill_select("src_dbname", result, true, true, true);
+				fill_select("dest_dbname", result, true, true, true);
 			}
 		}
 	);
@@ -74,36 +74,36 @@ function loadVhffsDbnames () {
 $(function() {
 	
 	// users
-	$("select#src_user").change(function(value){
-		loadVhffsGroups ();
+	$("select#dest_user").change(function(value){
+		loadIspconfigGroups ();
 	});
 	$.ajax('php/vhffs.ajax.php?action=users',
 		{success: function(result){
-				fill_select("src_user", result, true, true, true);
+				fill_select("dest_user", result, true, true, true);
 			}
 		}
 	);
 	
 	// projects
-	$("select#src_project").change(function(value){
-		loadVhffsWebsites ();
-		loadVhffsDbnames();
+	$("select#dest_project").change(function(value){
+		loadIspconfigWebsites ();
+		loadIspconfigDbnames();
 	});
-	loadVhffsGroups();
+	loadIspconfigGroups();
 	
 	// website
-	$("select#src_website").change(function(value){
+	$("select#dest_website").change(function(value){
 		val = $(this).val();
-		$("#src_url_host").val(val);
+		$("#dest_url_host").val(val);
 	});
-	loadVhffsWebsites();
+	loadIspconfigWebsites();
 	
 	// dbnames
-	$("select#src_dbname").change(function(value){
+	$("select#dest_dbname").change(function(value){
 		val = $(this).val();
-		$("#src_db_name").val(val);
-		$("#src_db_user").val(val);
+		$("#dest_db_name").val(val);
+		$("#dest_db_user").val(val);
 	});
-	loadVhffsDbnames();
+	loadIspconfigDbnames();
 	
 });

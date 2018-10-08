@@ -6,31 +6,29 @@ require_once __DIR__ . "/../config.inc.php";
 ?>
 		<h2> SOURCE </h2>
 		<form>
-			<label for="server">SERVER</label>
-			<select id="server" name="server">
+			<label for="src_server">SERVER</label>
+			<select id="src_server" name="src_server">
 				<option value=""></option>
 			</select> <br/>
 			<br/>
 			
-			<label for="user">user</label>
-			<select id="user" name="user">
+			<label for="src_user">user</label>
+			<select id="src_user" name="src_user">
 				<option value=""></option>
 			</select> <br/>
 			
-			<label for="project">project</label>
-			<select id="project" name="project">
+			<label for="src_project">project</label>
+			<select id="src_project" name="src_project">
 				<option value=""></option>
 			</select> <br/>
 			
-			<label for="website">website</label>
-			<select id="website" name="website">
+			<label for="src_website">website</label>
+			<select id="src_website" name="src_website">
 				<option value=""></option>
 			</select> <br/>
 			
-			<label for="dbname">dbname</label>
-			<select id="dbname" name="dbname">
+			<label for="src_dbname">dbname</label>
+			<select id="src_dbname" name="src_dbname">
 			</select> <br/>
-			
 		</form>
 <script type="text/javascript" src="js/source_data.js"></script>
-<?php
