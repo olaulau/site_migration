@@ -16,9 +16,10 @@ try {
 $sql = "
 	SELECT		g.name AS group_name, do.domain AS domain_name, db.database_name AS database_name, dbu.database_user AS database_user
 	FROM		web_database db
-    INNER JOIN	web_domain do ON db.parent_domain_id = do.domain_id
-    INNER JOIN	sys_group g ON do.sys_groupid = g.groupid
-	INNER JOIN	web_database_user dbu ON db.database_id = dbu.database_user_id
+	INNER JOIN	web_domain do ON db.parent_domain_id = do.domain_id
+	INNER JOIN	sys_group g ON do.sys_groupid = g.groupid
+	INNER JOIN	web_database_user dbu ON db.database_user_id = dbu.database_user_id
+	ORDER BY	group_name ASC, domain_name ASC, database_name ASC, database_user ASC
 ;";
 $stmt_ispconfig = $dbh_ispconfig->query($sql);
 if ($stmt_ispconfig === false) {
