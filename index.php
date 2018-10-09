@@ -13,33 +13,60 @@ require_once __DIR__ . "/config.inc.php";
 		<link rel="stylesheet" href="index.css" type="text/css">
 	</head>
 	<body>
-
-		<div class="quarter-screen">
-			<?php
-			require_once __DIR__ . '/php/source_data.php';
-			?>
-		</div>
-		
-		<div class="quarter-screen">
-			<?php
-			require_once __DIR__ . '/php/destination_data.php';
-			?>
-		</div>
-
-<br/>
-
-		<div class="quarter-screen">
-			<?php
-			require_once __DIR__ . '/php/source_form.php';
-			?>
-		</div>
-		
-		<div class="quarter-screen">
-			<?php
-			require_once __DIR__ . '/php/destination_form.php';
-			?>
-		</div>
 	
+		<div class="column">
+			<div class="quarter-screen top">
+				<?php
+				require_once __DIR__ . '/php/source_data.php';
+				?>
+			</div>
+			
+			<div class="quarter-screen bottom">
+				<?php
+				require_once __DIR__ . '/php/source_form.php';
+				?>
+			</div>
+		</div>
+		
+		<div class="column column-mid">
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+			=> <br/>
+		</div>
+		
+		<div class="column">
+			<div class="quarter-screen top">
+				<?php
+				require_once __DIR__ . '/php/destination_data.php';
+				?>
+			</div>
+			
+			<div class="quarter-screen bottom">
+				<?php
+				require_once __DIR__ . '/php/destination_form.php';
+				?>
+			</div>
+		</div>
+		
 	<script type="text/javascript" src="index.js"></script>
 	</body>
 </html>

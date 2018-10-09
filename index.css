@@ -7,25 +7,29 @@ html, body {
 	height: 100%;
 }
 
-
-table.decorated {
-	border: solid black 2px;
-	border-collapse:collapse;
-}
-table.decorated th {
-	background-color: #DDD;
-}
-table.decorated th, table.decorated td {
-	border: solid black 1px;
-	padding: 2px;
-}
-
-div.quarter-screen {
+div.column {
 	display: inline-block;
-	max-height: 50%;
-	width: 45%;
-	overflow-y: scroll;
+	width: 43%;
+	height: 100%;
 	border: dashed grey 2px;
+	border-radius: 20px;
+}
+
+div.column-mid {
+	width: 4%;
+	vertical-align: top;
+	font-size: 2.5em;
+	font-weight: bold;
+	overflow: hidden;
+	text-align: center;
+	border: 0; 
+	
+}
+div.quarter-screen.top {
+	min-height: 40%;
+}
+div.quarter-screen.bottom {
+	min-height: 60%;
 }
 
 
