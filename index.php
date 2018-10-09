@@ -13,6 +13,7 @@ require_once __DIR__ . "/config.inc.php";
 		<link rel="stylesheet" href="index.css" type="text/css">
 	</head>
 	<body>
+		<form action="migrate.php" method="post">
 	
 		<div class="column">
 			<div class="quarter-screen top">
@@ -28,7 +29,7 @@ require_once __DIR__ . "/config.inc.php";
 			</div>
 		</div>
 		
-		<div class="column column-mid">
+		<div class="column small">
 			=> <br/>
 			=> <br/>
 			=> <br/>
@@ -67,6 +68,12 @@ require_once __DIR__ . "/config.inc.php";
 			</div>
 		</div>
 		
-	<script type="text/javascript" src="index.js"></script>
+		<div class="column small">
+			<button class="btn btn-lg btn-success">GO</button>
+		</div>
+	
+		</form>
+		
+		<script type="text/javascript" src="index.js"></script>
 	</body>
 </html>

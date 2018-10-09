@@ -7,23 +7,30 @@ html, body {
 	height: 100%;
 }
 
+form {
+	margin: 0;
+}
+
 div.column {
 	display: inline-block;
-	width: 43%;
+	width: 44%;
 	height: 100%;
 	border: dashed grey 2px;
 	border-radius: 20px;
 }
 
-div.column-mid {
-	width: 4%;
+div.column.small {
+	width: 5%;
 	vertical-align: top;
 	font-size: 2.5em;
 	font-weight: bold;
 	overflow: hidden;
 	text-align: center;
-	border: 0; 
-	
+	border: 0;
+	border-radius: 0;
+}
+div.column.small button {
+	height: 100%;
 }
 div.quarter-screen.top {
 	min-height: 40%;
