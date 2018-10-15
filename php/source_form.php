@@ -26,7 +26,7 @@
 			<h4>url</h4>
 			
 			<label for="src_url_scheme">scheme</label>
-			<input type="text" id="src_url_scheme" name="src_url_scheme" value="" placeholder="src_url_scheme"> <br/>
+			<input type="text" id="src_url_scheme" name="src_url_scheme" value="https" placeholder="src_url_scheme"> <br/>
 			
 			<label for="src_url_host">host</label>
 			<input type="text" id="src_url_host" name="src_url_host" value="" placeholder="src_url_host"> <br/>

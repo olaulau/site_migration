@@ -97,8 +97,6 @@ then
 	../extra_modifications.sh
 fi
 
-
-
 ## cleanup destination (tables and files) ??
 
 
@@ -143,3 +141,5 @@ then
 	echo "cleanup ..."
 	rm -Rf tmp
 fi
+
+echo "done"

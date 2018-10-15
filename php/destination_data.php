@@ -9,18 +9,25 @@ require_once __DIR__ . "/../config.inc.php";
 		<label for="dest_server">SERVER</label>
 		<select id="dest_server">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<br/>
 		<br/>
 		
 		<label for="dest_user">user</label>
 		<select id="dest_user">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<br/>
 		
 		<label for="dest_website">website</label>
 		<select id="dest_website">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<label for="dest_shelluser">shelluser</label>
+		<select id="dest_shelluser">
+			<option value=""></option>
+		</select>
+		<br/>
 		
 		<label for="dest_dbuser">dbuser</label>
 		<select id="dest_dbuser">

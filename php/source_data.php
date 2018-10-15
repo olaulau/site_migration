@@ -9,7 +9,8 @@ require_once __DIR__ . "/../config.inc.php";
 		<label for="src_server">SERVER</label>
 		<select id="src_server">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<br/>
 		<br/>
 		
 		<label for="src_user">user</label>
@@ -19,15 +20,17 @@ require_once __DIR__ . "/../config.inc.php";
 		<label for="src_project">project</label>
 		<select id="src_project">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<br/>
 		
 		<label for="src_website">website</label>
 		<select id="src_website">
 			<option value=""></option>
-		</select> <br/>
+		</select>
+		<br/>
 		
 		<label for="src_dbname">dbname</label>
 		<select id="src_dbname">
-		</select> <br/>
+		</select>
 		
 <script type="text/javascript" src="js/source_data.js"></script>

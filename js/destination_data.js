@@ -51,6 +51,21 @@ function loadIspconfigWebsites () {
 }
 
 
+function loadIspconfigShellusers () {
+	var url = 'php/ispconfig.ajax.php?action=shellusers';
+	var website = $("select#dest_website").val();
+	if (! $.isEmptyObject(website)) {
+		url = url + "&website=" + website;
+	}
+	$.ajax(url,
+		{success: function(result){
+				fill_select("dest_shelluser", result, true, true, true);
+			}
+		}
+	);
+}
+
+
 function loadIspconfigDbusers () {
 	var url = 'php/ispconfig.ajax.php?action=dbusers';
 	var website = $("select#dest_website").val();
@@ -91,10 +106,20 @@ $(function() {
 	
 	// website
 	$("select#dest_website").change(function(value){
-		$("#dest_url_host").val($(this).val());
+		website = $(this).val();
+		$("#dest_url_host").val(website);
 		loadIspconfigDbusers ();
+		loadIspconfigShellusers ();
+		
+		$("#dest_shell_directory").val("/var/www/web/"+website+"/web");
 	});
 	loadIspconfigWebsites ();
+	
+	// shelluser
+	$("select#dest_shelluser").change(function(value){
+		$("#dest_shell_user").val($(this).val());
+	});
+	loadIspconfigShellusers ();
 	
 	// dbusers
 	$("select#dest_dbuser").change(function(value){

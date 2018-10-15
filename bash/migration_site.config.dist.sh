@@ -3,8 +3,8 @@
 ## global config
 DO_CLEANUP=true
 DO_IMPORT=true
-DO_MODIFICACTIONS=false
-DO_EXTRA_MODIFICATIONS=false
+DO_MODIFICACTIONS=true
+DO_EXTRA_MODIFICATIONS=true
 DO_EXPORT=true
 USE_RSYNC=false # for website transfert, instead of lbzip2 and tar through SSH
 

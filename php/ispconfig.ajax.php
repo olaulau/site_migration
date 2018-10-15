@@ -49,6 +49,19 @@ else if ($_GET['action'] === 'websites') {
 	}
 }
 
+else if ($_GET['action'] === 'shellusers') {
+	$sql = "
+		SELECT		DISTINCT su.username AS username
+		FROM		shell_user su
+		INNER JOIN	web_domain do ON su.parent_domain_id = do.domain_id
+		" . (empty($_GET['website']) ? "" : "WHERE		do.domain = ?") . "
+		ORDER BY	username ASC
+	";
+	if (!empty($_GET['website'])) {
+		$params[] = $_GET['website'];
+	}
+}
+
 else if ($_GET['action'] === 'dbusers') {
 	$sql = "
 		SELECT		DISTINCT dbu.database_user AS database_user
