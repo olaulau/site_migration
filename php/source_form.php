@@ -10,7 +10,7 @@
 			<input type="password" id="src_shell_password" name="src_shell_password" value="" placeholder="src_shell_password"> <br/>
 			
 			<label for="src_shell_directory">directory</label>
-			<input type="text" id="src_shell_directory" name="src_shell_directory" value="" placeholder="src_shell_directory"> <br/>
+			<input type="text" id="src_shell_directory" name="src_shell_directory" value="" placeholder="src_shell_directory" size="70"> <br/>
 			
 			<h4>db</h4>
 			
