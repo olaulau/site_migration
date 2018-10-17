@@ -19,7 +19,7 @@ cd tmp
 ## getting source
 if [ $DO_IMPORT == true ]
 then
-	echo "getting source ..."
+	echo " getting source "
 	echo "$SRC_SHELL_PASSWORD" > sshpass.txt
 	
 	if [ ! -z $SRC_DB_NAME ]
@@ -52,6 +52,17 @@ then
 		grep -rl --include="*.php" $SRC_DB_PASSWORD website | xargs sed -i "s|$SRC_DB_PASSWORD|$DEST_DB_PASSWORD|g"
 	fi
 	grep -rl --include="*.php" $SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_SCHEME://$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
+	#grep -rl --include="*.php" $SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
+	#grep -rl --include="*.php" $SRC_URL_HOST website | xargs sed -i "s|$SRC_URL_HOST|$DEST_URL_HOST|g"
+	
+	echo "$SRC_SHELL_PASSWORD" > sshpass.txt
+	SRC_SHELL_REALPATH=`sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $SRC_SHELL_USER@$SRC_SHELL_HOST "realpath $SRC_SHELL_DIRECTORY"`
+	rm sshpass.txt
+	echo "$DEST_SHELL_PASSWORD" > sshpass.txt
+	DEST_SHELL_REALPATH=`sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $DEST_SHELL_USER@$DEST_SHELL_HOST "realpath $DEST_SHELL_DIRECTORY"`
+	rm sshpass.txt
+	grep -rl --include="*.php" $SRC_SHELL_DIRECTORY website | xargs sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g"	
+	grep -rl --include="*.php" $SRC_SHELL_REALPATH website | xargs sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g"
 	
 	if [ ! -z $SRC_DB_NAME ]
 	then
@@ -104,7 +115,7 @@ fi
 ## pushing destination
 if [ $DO_EXPORT == true ]
 then
-	echo "pushing destination ..."
+	echo " pushing destination "
 	echo "$DEST_SHELL_PASSWORD" > sshpass.txt
 	
 	if [ ! -z $SRC_DB_NAME ] && [ ! -z $DEST_DB_NAME ]
