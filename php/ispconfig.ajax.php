@@ -12,18 +12,6 @@ try {
 }
 
 
-// query ispconfig
-$sql = "
-	SELECT		g.name AS group_name, do.domain AS domain_name, db.database_name AS database_name, dbu.database_user AS database_user
-	FROM		sys_group g
-	INNER JOIN	web_domain do ON do.sys_groupid = g.groupid
-	INNER JOIN	web_database_user dbu ON db.database_user_id = dbu.database_user_id
-	INNER JOIN	web_database db ON db.parent_domain_id = do.domain_id
-	ORDER BY	group_name ASC, domain_name ASC, database_name ASC, database_user ASC
-";
-
-
-
 $params = [];
 
 // query ispconfig
@@ -38,8 +26,7 @@ if ($_GET['action'] === 'users') {
 else if ($_GET['action'] === 'websites') {
 	$sql = "
 		SELECT		DISTINCT do.domain AS domain_name
-		FROM		web_database db
-		INNER JOIN	web_domain do ON db.parent_domain_id = do.domain_id
+		FROM		web_domain do
 		INNER JOIN	sys_group g ON do.sys_groupid = g.groupid
 		" . (empty($_GET['user']) ? "" : "WHERE		g.name = ?") . "
 		ORDER BY	domain_name ASC
