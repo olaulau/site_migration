@@ -1,12 +1,12 @@
 #!/bin/bash
 
 ## global config
-DO_CLEANUP=true
+DO_CLEANUP=false
 DO_IMPORT=true
 DO_MODIFICACTIONS=true
 DO_EXTRA_MODIFICATIONS=true
 DO_EXPORT=true
-USE_RSYNC=false # for website transfert, instead of lbzip2 and tar through SSH
+USE_RSYNC=true # for website transfert, instead of lbzip2 and tar through SSH
 
 
 ## source config

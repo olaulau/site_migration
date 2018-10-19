@@ -34,7 +34,7 @@ then
 	then
 		sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $SRC_SHELL_USER@$SRC_SHELL_HOST "tar cf - -C $SRC_SHELL_DIRECTORY ./ | lbzip2" | lbunzip2 | tar x -C website
 	else
-		sshpass -f sshpass.txt rsync -zrlpt $SRC_SHELL_USER@$SRC_SHELL_HOST:$SRC_SHELL_DIRECTORY/ website/
+		sshpass -f sshpass.txt rsync -zrlpt --delete $SRC_SHELL_USER@$SRC_SHELL_HOST:$SRC_SHELL_DIRECTORY/ website/
 	fi
 	
 	rm sshpass.txt
@@ -51,9 +51,9 @@ then
 		grep -rl --include="*.php" $SRC_DB_USER website | xargs sed -i "s|$SRC_DB_USER|$DEST_DB_USER|g"
 		grep -rl --include="*.php" $SRC_DB_PASSWORD website | xargs sed -i "s|$SRC_DB_PASSWORD|$DEST_DB_PASSWORD|g"
 	fi
-	grep -rl --include="*.php" $SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_SCHEME://$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
-	#grep -rl --include="*.php" $SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
-	#grep -rl --include="*.php" $SRC_URL_HOST website | xargs sed -i "s|$SRC_URL_HOST|$DEST_URL_HOST|g"
+	grep -rl $SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_SCHEME://$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
+	#grep -rl $SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
+	#grep -rl $SRC_URL_HOST website | xargs sed -i "s|$SRC_URL_HOST|$DEST_URL_HOST|g"
 	
 	echo "$SRC_SHELL_PASSWORD" > sshpass.txt
 	SRC_SHELL_REALPATH=`sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $SRC_SHELL_USER@$SRC_SHELL_HOST "realpath $SRC_SHELL_DIRECTORY"`
@@ -61,11 +61,15 @@ then
 	echo "$DEST_SHELL_PASSWORD" > sshpass.txt
 	DEST_SHELL_REALPATH=`sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $DEST_SHELL_USER@$DEST_SHELL_HOST "realpath $DEST_SHELL_DIRECTORY"`
 	rm sshpass.txt
-	grep -rl --include="*.php" $SRC_SHELL_DIRECTORY website | xargs sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g"	
-	grep -rl --include="*.php" $SRC_SHELL_REALPATH website | xargs sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g"
+	grep -rl $SRC_SHELL_DIRECTORY website | xargs sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g"	
+	grep -rl $SRC_SHELL_REALPATH website | xargs sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g"
 	
 	if [ ! -z $SRC_DB_NAME ]
 	then
+		echo "applying modifications to database ..."
+		sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g" database.sql
+		sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g" database.sql
+		
 		src=$SRC_URL_SCHEME://$SRC_URL_HOST
 		if [ ! -z $SRC_URL_DIRECTORY ]
 			then src=$src/$SRC_URL_DIRECTORY
@@ -135,7 +139,7 @@ then
 	then
 		tar cf - -C website ./ | lbzip2 | sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $DEST_SHELL_USER@$DEST_SHELL_HOST "lbunzip2 | tar x -C $DEST_SHELL_DIRECTORY"
 	else
-		sshpass -f sshpass.txt rsync -zrlpt website/ $DEST_SHELL_USER@$DEST_SHELL_HOST:$DEST_SHELL_DIRECTORY/
+		sshpass -f sshpass.txt rsync -zrlpt --delete website/ $DEST_SHELL_USER@$DEST_SHELL_HOST:$DEST_SHELL_DIRECTORY/
 	fi
 	
 	rm sshpass.txt
