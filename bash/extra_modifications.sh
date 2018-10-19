@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sed --in-place='' "s|SetHandler|#SetHandler|g" website/.htaccess
+grep -rl --include=".htaccess" SetHandler website | xargs sed --in-place='' "s|SetHandler|#SetHandler|g"
 
 
 exit
