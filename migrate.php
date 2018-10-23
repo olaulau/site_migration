@@ -59,7 +59,9 @@ flush_with_blank ();
 
 
 // execute script
+set_time_limit(0);
 $cmd = "cd bash && ./migration_site.sh 2>&1";
+ini_set('max_execution_time', 0);
 // passthru($cmd, $return_var);
 $ph = popen ($cmd,'r');
 while (! feof ($ph)) {
