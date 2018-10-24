@@ -51,6 +51,8 @@ then
 		grep -rl --include="*.php" $SRC_DB_USER website | xargs sed -i "s|$SRC_DB_USER|$DEST_DB_USER|g"
 		grep -rl --include="*.php" $SRC_DB_PASSWORD website | xargs sed -i "s|$SRC_DB_PASSWORD|$DEST_DB_PASSWORD|g"
 	fi
+	
+	grep -rIl $SRC_URL_SCHEME://www.$SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_SCHEME://www.$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_SCHEME://$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
 	grep -rIl $SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_SCHEME://$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_SCHEME://$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
 	#grep -rIl $SRC_URL_HOST/$SRC_URL_DIRECTORY/ website | xargs sed -i "s|$SRC_URL_HOST/$SRC_URL_DIRECTORY/|$DEST_URL_HOST/$DEST_URL_DIRECTORY/|g"
 	#grep -rIl $SRC_URL_HOST website | xargs sed -i "s|$SRC_URL_HOST|$DEST_URL_HOST|g"
@@ -63,13 +65,14 @@ then
 	rm sshpass.txt
 	grep -rIl $SRC_SHELL_DIRECTORY website | xargs sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g"
 	grep -rIl $SRC_SHELL_REALPATH website | xargs sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g"
+	
 	if [ ! -z $SRC_DB_NAME ]
 	then
 		echo "applying modifications to database ..."
 		sed -i "s|$SRC_SHELL_DIRECTORY|$DEST_SHELL_REALPATH|g" database.sql
 		sed -i "s|$SRC_SHELL_REALPATH|$DEST_SHELL_REALPATH|g" database.sql
 		
-		src=$SRC_URL_SCHEME://$SRC_URL_HOST
+		src=$SRC_URL_SCHEME://www.$SRC_URL_HOST
 		if [ ! -z $SRC_URL_DIRECTORY ]
 			then src=$src/$SRC_URL_DIRECTORY
 		fi
@@ -79,7 +82,13 @@ then
 		fi
 		sed -i "s|$src|$dest|g" database.sql
 		
-		src=$SRC_URL_HOST
+		src=$SRC_URL_SCHEME://SRC_URL_HOST
+		if [ ! -z $SRC_URL_DIRECTORY ]
+			then src=$src/$SRC_URL_DIRECTORY
+		fi
+		sed -i "s|$src|$dest|g" database.sql
+		
+		src=www.$SRC_URL_HOST
 		if [ ! -z $SRC_URL_DIRECTORY ]
 			then src=$src/$SRC_URL_DIRECTORY
 		fi
@@ -87,6 +96,12 @@ then
 		if [ ! -z $DEST_URL_DIRECTORY ]
 			then dest=$dest/$DEST_URL_DIRECTORY
 		fi 
+		sed -i "s|$src|$dest|g" database.sql
+		
+		src=$SRC_URL_HOST
+		if [ ! -z $SRC_URL_DIRECTORY ]
+			then src=$src/$SRC_URL_DIRECTORY
+		fi
 		sed -i "s|$src|$dest|g" database.sql
 		
 		if [ ! -z $SRC_URL_DIRECTORY ]
