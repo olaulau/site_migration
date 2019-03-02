@@ -21,3 +21,4 @@ $src_shell_user = "";
 
 // default destination config
 $dest_shell_host = "";
+$dest_shell_user = null;

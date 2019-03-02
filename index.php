@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . "/config.inc.php";
+require_once __DIR__ . "/php/form.inc.php";
+
 ?>
 <!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -24,7 +26,7 @@ require_once __DIR__ . "/config.inc.php";
 			
 			<div class="quarter-screen bottom">
 				<?php
-				require_once __DIR__ . '/php/source_form.php';
+				echo_form ('src', $src_shell_host, $src_shell_user);
 				?>
 			</div>
 		</div>
@@ -63,7 +65,7 @@ require_once __DIR__ . "/config.inc.php";
 			
 			<div class="quarter-screen bottom">
 				<?php
-				require_once __DIR__ . '/php/destination_form.php';
+				echo_form ('dest', $dest_shell_host, $dest_shell_user);
 				?>
 			</div>
 		</div>
