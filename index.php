@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/config.inc.php";
 require_once __DIR__ . "/php/form.inc.php";
+require_once __DIR__ . "/php/data.inc.php";
 
 ?>
 <!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -20,7 +21,7 @@ require_once __DIR__ . "/php/form.inc.php";
 		<div class="column">
 			<div class="quarter-screen top">
 				<?php
-				require_once __DIR__ . '/php/source_data.php';
+				echo_data ('src');
 				?>
 			</div>
 			
@@ -59,7 +60,7 @@ require_once __DIR__ . "/php/form.inc.php";
 		<div class="column">
 			<div class="quarter-screen top">
 				<?php
-				require_once __DIR__ . '/php/destination_data.php';
+				echo_data ('dest');
 				?>
 			</div>
 			
