@@ -75,7 +75,13 @@ $(function() {
 		
 		user = $("select#src_user").val();
 		project = $("select#src_project").val();
-		$("#src_shell_directory").val("/data/home/"+user.substring(0,1)+"/"+user.substring(1,2)+"/"+user+"/"+project+"/"+website+"-web/htdocs");
+		if (! $.isEmptyObject(website)) {
+			("#"+side+"_shell_directory").val("/data/home/"+user.substring(0,1)+"/"+user.substring(1,2)+"/"+user+"/"+project+"/"+website+"-web/htdocs");
+		}
+		else {
+			$("#"+side+"_shell_directory").val("");
+		}
+		
 	});
 	loadVhffsWebsites();
 	

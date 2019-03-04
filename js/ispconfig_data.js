@@ -81,8 +81,13 @@ function ispconfigLoadData (side, server_name) {
 		$("#"+side+"_url_host").val(website);
 		loadIspconfigDbusers (side, server_name);
 		loadIspconfigShellusers (side, server_name);
+		if (! $.isEmptyObject(website)) {
+			$("#"+side+"_shell_directory").val("/var/www/web/"+website+"/web");
+		}
+		else {
+			$("#"+side+"_shell_directory").val("");
+		}
 		
-		$("#"+side+"_shell_directory").val("/var/www/web/"+website+"/web");
 	});
 	loadIspconfigWebsites (side, server_name);
 	
