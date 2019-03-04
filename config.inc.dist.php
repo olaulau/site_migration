@@ -1,24 +1,30 @@
 <?php
 // copy this file to config.inc.php and fill in values
 
-// config vhffs
-$vhffs_db_host = "localhost"; // tunnel SSH : ssh -L 5432:localhost:5432 <user>@<host>
-$vhffs_db_port = "5432";
-$vhffs_db_name = "vhffs";
-$vhffs_db_user = "vhffs";
-$vhffs_db_password = "";
+$src = [
+	'name' => 'srv1',
+	//'type' => 'ispconfig',
+	'db_host' => 'localhost',
+	'db_port' => '3306',
+	'db_name' => 'dbispconfig',
+	'db_user' => 'dbispconfig',
+	'db_password' => '',
+	//'server_id' => 1,
+	'server_name' => 'srv1.host.fr',
+	'shell_host' => 'srv1.host.fr',
+	'shell_user' => 'root',
+];
 
-// config ispconfig
-$ispconfig_db_host = "localhost";
-$ispconfig_db_port = "3306";
-$ispconfig_db_name = "dbispconfig";
-$ispconfig_db_user = "ispconfig";
-$ispconfig_db_password = "";
-
-// default source config
-$src_shell_host = "";
-$src_shell_user = "";
-
-// default destination config
-$dest_shell_host = "";
-$dest_shell_user = null;
+$dest = [
+	'name' => 'srv2',
+	//'type' => 'ispconfig',
+	'db_host' => 'localhost',
+	'db_port' => '3306',
+	'db_name' => 'dbispconfig',
+	'db_user' => 'dbispconfig',
+	'db_password' => '',
+	//'server_id' => 2,
+	'server_name' => 'srv2.host.fr',
+	'shell_host' => 'srv2.host.fr',
+	'shell_user' => null,
+];

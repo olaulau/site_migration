@@ -1,80 +1,64 @@
 <?php
 
-function echo_data ($side) {
-	if ($side === 'src') {
+function echo_data ($side, $type) {
+	if ($type === 'vhffs') {
 		?>
-		<h2> SOURCE </h2>
-		
-		<label for="src_server">SERVER</label>
-		<select id="src_server">
+		<label for="<?= $side ?>_user">user</label>
+		<select id="<?= $side ?>_user">
 			<option value=""></option>
 		</select>
-		<br/>
-		<br/>
-		
-		<label for="src_user">user</label>
-		<select id="src_user">
-			<option value=""></option>
-		</select>
-		<label for="src_project">project</label>
-		<select id="src_project">
+		<label for="<?= $side ?>_project">project</label>
+		<select id="<?= $side ?>_project">
 			<option value=""></option>
 		</select>
 		<br/>
 		
-		<label for="src_website">website</label>
-		<select id="src_website">
+		<label for="<?= $side ?>_website">website</label>
+		<select id="<?= $side ?>_website">
 			<option value=""></option>
 		</select>
 		<br/>
 		
-		<label for="src_dbname">dbname</label>
-		<select id="src_dbname">
+		<label for="<?= $side ?>_dbname">dbname</label>
+		<select id="<?= $side ?>_dbname">
 		</select>
 		
-		<script type="text/javascript" src="js/source_data.js"></script>
+		<script type="text/javascript" src="js/vhffs_data.js"></script>
 		<?php
 	}
-	elseif ($side === 'dest') {
+	
+	elseif ($type === 'ispconfig') {
 		?>
-		<h2> DESTINATION </h2>
-		
-		<label for="dest_server">SERVER</label>
-		<select id="dest_server">
-		<option value=""></option>
-		</select>
-		<br/>
-		<br/>
-		
-		<label for="dest_user">user</label>
-		<select id="dest_user">
+		<label for="<?= $side ?>_user">user</label>
+		<select id="<?= $side ?>_user">
 		<option value=""></option>
 		</select>
 		<br/>
 		
-		<label for="dest_website">website</label>
-		<select id="dest_website">
+		<label for="<?= $side ?>_website">website</label>
+		<select id="<?= $side ?>_website">
 		<option value=""></option>
 		</select>
-		<label for="dest_shelluser">shelluser</label>
-		<select id="dest_shelluser">
+		<label for="<?= $side ?>_shelluser">shelluser</label>
+		<select id="<?= $side ?>_shelluser">
 		<option value=""></option>
 		</select>
 		<br/>
 		
-		<label for="dest_dbuser">dbuser</label>
-		<select id="dest_dbuser">
+		<label for="<?= $side ?>_dbuser">dbuser</label>
+		<select id="<?= $side ?>_dbuser">
 		<option value=""></option>
 		</select>
-		<label for="dest_dbname">dbname</label>
-		<select id="dest_dbname">
+		<label for="<?= $side ?>_dbname">dbname</label>
+		<select id="<?= $side ?>_dbname">
 		<option value=""></option>
 		</select>
 		
-		<script type="text/javascript" src="js/destination_data.js"></script>
+		<script type="text/javascript" src="js/ispconfig_data.js"></script>
 		<?php
 	}
+	
 	else {
-		die ("wrong side");
+		die ("wrong type");
 	}
 }

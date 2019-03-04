@@ -20,14 +20,22 @@ require_once __DIR__ . "/php/data.inc.php";
 	
 		<div class="column">
 			<div class="quarter-screen top">
+				<h2> SOURCE </h2>
+				<label for="src_server">SERVER</label>
+				<select id="src_server">
+					<option value=""><?= $src['name'] ?></option>
+				</select>
+				<br/>
+				<br/>
+				
 				<?php
-				echo_data ('src');
+				echo_data ('src', 'ispconfig');
 				?>
 			</div>
 			
 			<div class="quarter-screen bottom">
 				<?php
-				echo_form ('src', $src_shell_host, $src_shell_user);
+				echo_form ('src', $src['shell_host'], $src['shell_user']);
 				?>
 			</div>
 		</div>
@@ -59,14 +67,21 @@ require_once __DIR__ . "/php/data.inc.php";
 		
 		<div class="column">
 			<div class="quarter-screen top">
+				<h2> DESTINATION </h2>
+				<label for="dest_server">SERVER</label>
+				<select id="dest_server">
+					<option value=""><?= $dest['name'] ?></option>
+				</select>
+				<br/>
+				<br/>
 				<?php
-				echo_data ('dest');
+				echo_data ('dest', 'ispconfig');
 				?>
 			</div>
 			
 			<div class="quarter-screen bottom">
 				<?php
-				echo_form ('dest', $dest_shell_host, $dest_shell_user);
+				echo_form ('dest', $dest['shell_host'], $dest['shell_user']);
 				?>
 			</div>
 		</div>
@@ -78,5 +93,12 @@ require_once __DIR__ . "/php/data.inc.php";
 		</form>
 		
 		<script type="text/javascript" src="index.js"></script>
+		<script type="text/javascript" src="js/functions.js"></script>
+<!-- 		<script type="text/javascript" src="js/vhffs_data.js"></script> -->
+		<script type="text/javascript" src="js/ispconfig_data.js"></script>
+		<script type="text/javascript">
+			ispconfigLoadData ('src',  '<?= $src['server_name'] ?>');
+			ispconfigLoadData ('dest', '<?= $dest['server_name'] ?>');
+		</script>
 	</body>
 </html>
