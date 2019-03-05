@@ -36,7 +36,7 @@ if ($_GET['action'] === 'users') {
 
 else if ($_GET['action'] === 'websites') {
 	$sql = "
-		SELECT		DISTINCT do.domain AS domain_name
+		SELECT		DISTINCT do.domain AS domain_name, do.document_root as document_root
 		FROM		web_domain do
 		INNER JOIN	sys_group g ON do.sys_groupid = g.groupid
 		INNER JOIN	server ON do.server_id = server.server_id
@@ -107,7 +107,7 @@ if ($res === false) {
 	die;
 }
 
-$array = $stmt_ispconfig->fetchAll(PDO::FETCH_COLUMN);
+$array = $stmt_ispconfig->fetchAll(PDO::FETCH_NUM);
 if (is_array($array)) {
 	header("Content-Type: application/json; charset=UTF-8");
 	echo json_encode($array);

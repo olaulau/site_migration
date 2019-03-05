@@ -16,6 +16,7 @@ function loadIspconfigWebsites (side, server_name) {
 	}
 	$.ajax(url,
 		{success: function(result){
+				window[side+'_websites'] = result; // store websites associated with webroot for later use
 				fill_select(side+"_website", result, true, true, true);
 			}
 		}
@@ -30,8 +31,8 @@ function loadIspconfigShellusers (side, server_name) {
 		url = url + "&website=" + website;
 	}
 	$.ajax(url,
-		{success: function(result){
-				fill_select(side+"_shelluser", result, true, true, true);
+		{success: function(result) {
+				fill_select (side+"_shelluser", result, true, true, true);
 			}
 		}
 	);
@@ -82,7 +83,15 @@ function ispconfigLoadData (side, server_name) {
 		loadIspconfigDbusers (side, server_name);
 		loadIspconfigShellusers (side, server_name);
 		if (! $.isEmptyObject(website)) {
-			$("#"+side+"_shell_directory").val("/var/www/web/"+website+"/web");
+			websites = window[side+'_websites'];
+			var webroot;
+			for (var i = 0; i < websites.length; i++) {
+				var current_website = websites[i];
+				if (current_website[0] == website) {
+					webroot = current_website[1];
+				}
+			}
+			$("#"+side+"_shell_directory").val(webroot+"/web");
 		}
 		else {
 			$("#"+side+"_shell_directory").val("");
