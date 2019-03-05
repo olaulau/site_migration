@@ -1,5 +1,7 @@
 <?php
 
+//TODO check parameters not empty
+
 // read template
 $config = file_get_contents ("bash/migration_site.config.template.sh");
 

@@ -28,3 +28,8 @@ $dest = [
 	'shell_host' => 'srv2.host.fr',
 	'shell_user' => null,
 ];
+
+$servers = [
+	1 => $src,
+	2 => $dest,
+];

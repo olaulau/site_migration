@@ -1,10 +1,17 @@
 <?php
 require_once __DIR__ . "/config.inc.php";
+require_once __DIR__ . "/php/functions.inc.php";
 require_once __DIR__ . "/php/form.inc.php";
 require_once __DIR__ . "/php/data.inc.php";
 
+if (isset ($_GET['src_server'])) {
+	$src_server = $_GET['src_server'];
+}
+if (isset ($_GET['dest_server'])) {
+	$dest_server = $_GET['dest_server'];
+}
 ?>
-<!DOCTYPE unspecified PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!doctype html>
 <html>
 	<head>
 		<meta charset="UTF-8">
@@ -16,23 +23,34 @@ require_once __DIR__ . "/php/data.inc.php";
 		<link rel="stylesheet" href="index.css" type="text/css">
 	</head>
 	<body>
-		<form action="migrate.php" method="post">
-	
 		<div class="column">
 			<div class="quarter-screen top">
 				<h2> SOURCE </h2>
+				
+				<form id="server_form" action="" method="get"></form>
 				<label for="src_server">SERVER</label>
-				<select id="src_server">
-					<option value=""><?= $src['name'] ?></option>
+				<select form="server_form" id="src_server" name="src_server">
+					<option value=""></option>
+					<?php
+					generate_select_options ($servers, 'name', 'name', $src_server);
+					?>
 				</select>
 				<br/>
 				<br/>
 				
 				<?php
-				echo_data ('src', 'ispconfig');
+				if (!empty ($src_server)) {
+					echo_data ('src', 'ispconfig');
+				}
+				else {
+					?>
+					<p>please select a server if you want easy website migration</p>
+					<?php
+				}
 				?>
 			</div>
 			
+			<form id="migrate_form" action="migrate.php" method="post"></form>
 			<div class="quarter-screen bottom">
 				<?php
 				echo_form ('src', $src['shell_host'], $src['shell_user']);
@@ -69,13 +87,23 @@ require_once __DIR__ . "/php/data.inc.php";
 			<div class="quarter-screen top">
 				<h2> DESTINATION </h2>
 				<label for="dest_server">SERVER</label>
-				<select id="dest_server">
-					<option value=""><?= $dest['name'] ?></option>
+				<select form="server_form" id="dest_server" name="dest_server">
+					<option value=""></option>
+					<?php
+					generate_select_options ($servers, 'name', 'name', $dest_server);
+					?>
 				</select>
 				<br/>
 				<br/>
 				<?php
-				echo_data ('dest', 'ispconfig');
+				if (!empty ($dest_server)) {
+					echo_data ('dest', 'ispconfig');
+				}
+				else {
+					?>
+					<p>please select a server if you want easy website migration</p>
+					<?php
+				}
 				?>
 			</div>
 			
@@ -87,18 +115,21 @@ require_once __DIR__ . "/php/data.inc.php";
 		</div>
 		
 		<div class="column small">
-			<button class="btn btn-lg btn-success">GO</button>
+			<button form="migrate_form" class="btn btn-lg btn-success">GO</button>
 		</div>
 	
-		</form>
-		
 		<script type="text/javascript" src="index.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
 <!-- 		<script type="text/javascript" src="js/vhffs_data.js"></script> -->
 		<script type="text/javascript" src="js/ispconfig_data.js"></script>
 		<script type="text/javascript">
-			ispconfigLoadData ('src',  '<?= $src['server_name'] ?>');
-			ispconfigLoadData ('dest', '<?= $dest['server_name'] ?>');
+			var urlParams = new URLSearchParams(window.location.search);
+			src_server = urlParams.getAll('src_server');
+			dest_server = urlParams.getAll('dest_server');
+			if (src_server && src_server !== "" && dest_server && dest_server !== "") {
+				ispconfigLoadData ('src',  src_server);
+				ispconfigLoadData ('dest', dest_server);
+			}
 		</script>
 	</body>
 </html>

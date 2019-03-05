@@ -10,10 +10,7 @@ function fill_select (select_id, values, clearFirst, addEmptyValue, selectAloneV
 	}
 	
 	$.each(values, function(key, value) {
-		if (Array.isArray (value)) {
-			// use first colomn as value
-			value = value[0];
-		}
+		value = value[0];
 		$('<option value"'+value+'">'+value+'</option>').appendTo("select#"+select_id);
 	});
 	
