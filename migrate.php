@@ -1,6 +1,14 @@
 <?php
 
-//TODO check parameters not empty
+// check parameters not empty
+if (	empty ($_POST['src_shell_host']) || empty ($_POST['src_shell_user']) || empty ($_POST['src_shell_password']) || empty ($_POST['src_shell_directory']) ||
+		empty ($_POST['src_url_scheme']) || empty ($_POST['src_url_host'])||
+		empty ($_POST['dest_shell_host']) || empty ($_POST['dest_shell_user']) || empty ($_POST['dest_shell_password']) || empty ($_POST['dest_shell_directory']) ||
+		empty ($_POST['dest_url_scheme']) || empty ($_POST['dest_url_host']) ) {
+	die ("some mandatory parameters are empty. please check source and destination forms on previous page.");
+}
+
+
 
 // read template
 $config = file_get_contents ("bash/migration_site.config.template.sh");
