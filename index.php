@@ -118,18 +118,9 @@ if (isset ($_GET['dest_server'])) {
 			<button form="migrate_form" class="btn btn-lg btn-success">GO</button>
 		</div>
 	
-		<script type="text/javascript" src="index.js"></script>
 		<script type="text/javascript" src="js/functions.js"></script>
 <!-- 		<script type="text/javascript" src="js/vhffs_data.js"></script> -->
 		<script type="text/javascript" src="js/ispconfig_data.js"></script>
-		<script type="text/javascript">
-			var urlParams = new URLSearchParams(window.location.search);
-			src_server = urlParams.getAll('src_server');
-			dest_server = urlParams.getAll('dest_server');
-			if (src_server && src_server !== "" && dest_server && dest_server !== "") {
-				ispconfigLoadData ('src',  src_server);
-				ispconfigLoadData ('dest', dest_server);
-			}
-		</script>
+		<script type="text/javascript" src="index.js"></script>
 	</body>
 </html>
