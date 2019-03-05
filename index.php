@@ -6,9 +6,11 @@ require_once __DIR__ . "/php/data.inc.php";
 
 if (isset ($_GET['src_server'])) {
 	$src_server = $_GET['src_server'];
+	$src = search2dArray ($servers, 'name', $src_server);
 }
 if (isset ($_GET['dest_server'])) {
 	$dest_server = $_GET['dest_server'];
+	$dest = search2dArray ($servers, 'name', $dest_server);
 }
 ?>
 <!doctype html>
@@ -53,7 +55,7 @@ if (isset ($_GET['dest_server'])) {
 			<form id="migrate_form" action="migrate.php" method="post"></form>
 			<div class="quarter-screen bottom">
 				<?php
-				echo_form ('src', $src['shell_host'], $src['shell_user']);
+				echo_form ('src', @$src['shell_host'], '');
 				?>
 			</div>
 		</div>
@@ -109,7 +111,7 @@ if (isset ($_GET['dest_server'])) {
 			
 			<div class="quarter-screen bottom">
 				<?php
-				echo_form ('dest', $dest['shell_host'], $dest['shell_user']);
+				echo_form ('dest', @$dest['shell_host'], '');
 				?>
 			</div>
 		</div>

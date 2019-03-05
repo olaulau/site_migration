@@ -1,6 +1,7 @@
 <?php
 
 // check parameters not empty
+// var_dump($_POST); die;
 if (	empty ($_POST['src_shell_host']) || empty ($_POST['src_shell_user']) || empty ($_POST['src_shell_password']) || empty ($_POST['src_shell_directory']) ||
 		empty ($_POST['src_url_scheme']) || empty ($_POST['src_url_host'])||
 		empty ($_POST['dest_shell_host']) || empty ($_POST['dest_shell_user']) || empty ($_POST['dest_shell_password']) || empty ($_POST['dest_shell_directory']) ||
@@ -72,7 +73,6 @@ flush_with_blank ();
 set_time_limit(0);
 $cmd = "cd bash && ./migration_site.sh 2>&1";
 ini_set('max_execution_time', 0);
-// passthru($cmd, $return_var);
 $ph = popen ($cmd,'r');
 while (! feof ($ph)) {
     $s = fgets ($ph, 1048576);
@@ -80,7 +80,3 @@ while (! feof ($ph)) {
     flush_with_blank ();
 }
 pclose($ph);
-
-
-// delete config file
-unlink ("bash/migration_site.config.sh");

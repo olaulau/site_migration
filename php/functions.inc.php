@@ -30,3 +30,13 @@ function generate_select_options ($array, $value_indice=null, $label_indice=null
 		<?php
 	}
 }
+
+
+function search2dArray ($array, $column, $value) {
+	foreach ($array as $row) {
+		if ($row[$column] === $value) {
+			return $row;
+		}
+	}
+	return null;
+}

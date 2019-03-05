@@ -1,12 +1,19 @@
 <?php
 require_once __DIR__ . "/../config.inc.php";
+require_once __DIR__ . "/../php/functions.inc.php";
+
+
+// prepare
+if (isset ($_GET['server_name'])) {
+	$server_name = $_GET['server_name'];
+	$server = search2dArray ($servers, 'name', $server_name);
+}
 
 
 // connexion ispconfig
-
-$ispconfig_dsn = "mysql:host={$src['db_host']};port={$src['db_port']};dbname={$src['db_name']}";
+$ispconfig_dsn = "mysql:host={$server['db_host']};port={$server['db_port']};dbname={$server['db_name']}";
 try {
-	$dbh_ispconfig = new PDO($ispconfig_dsn, $src['db_user'], $src['db_password']);
+	$dbh_ispconfig = new PDO($ispconfig_dsn, $server['db_user'], $server['db_password']);
 } catch (PDOException $e) {
 	print "Error!: " . $e->getMessage() . "<br/>";
 	die();

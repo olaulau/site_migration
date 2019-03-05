@@ -169,6 +169,7 @@ if [ $DO_CLEANUP == true ]
 then
 	echo "cleanup ..."
 	rm -Rf tmp
+	rm -f migration_site.config.sh
 fi
 
 echo "done"
