@@ -1,10 +1,15 @@
 /.buildpath
 /.project
 /.settings/
+/.externalToolBuilders/
 .ptp-sync-folder
 /.ptp-sync/
+
 /vendor/
 /config.inc.php
 .htaccess
 .htpasswd
+sync.sh
 
+/bash/tmp/
+/bashuild/migration_site.config.sh
