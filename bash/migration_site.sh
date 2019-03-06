@@ -82,7 +82,7 @@ then
 		fi
 		sed -i "s|$src|$dest|g" database.sql
 		
-		src=$SRC_URL_SCHEME://SRC_URL_HOST
+		src=$SRC_URL_SCHEME://$SRC_URL_HOST
 		if [ ! -z $SRC_URL_DIRECTORY ]
 			then src=$src/$SRC_URL_DIRECTORY
 		fi
