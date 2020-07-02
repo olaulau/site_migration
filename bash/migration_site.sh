@@ -25,7 +25,7 @@ then
 	if [ ! -z $SRC_DB_NAME ]
 	then
 		echo "getting source database ..."
-		sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $SRC_SHELL_USER@$SRC_SHELL_HOST "export MYSQL_PWD=$SRC_DB_PASSWORD && mysqldump $SRC_DB_NAME -u $SRC_DB_USER | lbzip2" | lbunzip2 > database.sql
+		sshpass -f sshpass.txt ssh -oStrictHostKeyChecking=no $SRC_SHELL_USER@$SRC_SHELL_HOST "export MYSQL_PWD=$SRC_DB_PASSWORD && mysqldump $SRC_DB_NAME -u $SRC_DB_USER | lbzip2" | lbunzip2 | sed -e 's/DEFINER[ ]*=[ ]*[^*]*\*/\*/' > database.sql
 	fi
 	
 	echo "getting source website ..."
