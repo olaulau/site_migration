@@ -1,5 +1,5 @@
 # site_migration
 
-git clone
-composer install
-create config.inc.php
+git clone  
+composer install  
+create config.inc.php  
